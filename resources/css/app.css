@@ -6,9 +6,9 @@ body {
 
 @font-face {
     font-family: 'FontAwesome';
-    src: url('fonts/fontawesome-webfont.eot');
-    src: url('fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+    src: url('/fonts/fontawesome-webfont.eot');
+    src: url('/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
 }
 
 /*===== Header =====*/
