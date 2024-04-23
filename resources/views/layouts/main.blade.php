@@ -22,9 +22,8 @@
 
     <title>@yield('title')</title>
 
-    <style>
-        @yield('style')
-    </style>
+
+    @yield('style')
 </head>
 
 <body>
@@ -58,5 +57,7 @@
     </div>
 
     @yield('main')
+
+    @yield('script')
 </body>
 </html>

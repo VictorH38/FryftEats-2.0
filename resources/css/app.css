@@ -135,7 +135,7 @@ body {
 }
 
 #background {
-	background-image: url('../images/usc.jpeg');
+	background-image: url('/images/usc.jpeg');
 	background-size: cover;
 	background-position: center;
 	margin: 0px auto;
