@@ -171,7 +171,23 @@ body {
 }
 
 #price, #sort-by {
-	display: none;
+	background-color: #231F20;
+    color: white;
+    padding: 10px 0px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+#price {
+	width: 100px;
+}
+
+#sort-by {
+	width: 140px;
 }
 
 #search-button {
@@ -186,45 +202,6 @@ body {
 
 #search-button:hover {
     background-color: skyblue;
-}
-
-.sort-buttons {
-	margin-left: 15px;
-}
-
-.sort-by-button {
-	font-family: 'FontAwesome', sans-serif;
-    background-color: #231F20;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.options {
-    border: 1px solid #ccc;
-    background-color: white;
-    position: absolute;
-    z-index: 1000;
-    display: none;
-}
-
-.checkbox-group {
-	width: 100px;
-	padding: 0px 10px;
-}
-
-.sort-option {
-    display: block;
-    width: 100%;
-    padding: 5px 10px;
-    text-align: left;
-    border: none;
-    background: none;
-}
-
-.sort-option:hover {
-    background-color: #f0f0f0;
 }
 
 #search-text {

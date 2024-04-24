@@ -20,6 +20,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Search Page
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+Route::post('/toggleFavorite/{restaurantId}', [SearchController::class, 'toggleFavorite'])->name('search.toggleFavorite')->middleware('auth');
 
 // Contact Page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

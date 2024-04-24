@@ -112,11 +112,6 @@
                     <input type="password" id="confirm-password" name="password_confirmation" required>
                 </div>
 
-                <div>
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I have read and agree to all terms and conditions of JoesTable.</label>
-                </div>
-
                 <button type="submit" class="create-account-button"><span class="fa-user-plus"></span> Create Account</button>
             </form>
         </div>
