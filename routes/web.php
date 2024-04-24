@@ -11,9 +11,11 @@ use App\Http\Middleware\Authenticate;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // Authentication
-Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup');
+});
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Search Page

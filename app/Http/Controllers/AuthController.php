@@ -21,7 +21,7 @@ class AuthController extends Controller
     
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('home.index');
+            return redirect()->route('home.index');
         }
     
         return redirect()->route('auth.index')->with('loginError', 'The provided credentials do not match our records');
