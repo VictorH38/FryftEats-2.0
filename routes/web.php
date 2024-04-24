@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
-use App\Http\Middleware\Authenticate;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -25,3 +24,4 @@ Route::post('/toggleFavorite/{restaurantId}', [SearchController::class, 'toggleF
 
 // Contact Page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
