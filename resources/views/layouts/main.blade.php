@@ -33,15 +33,15 @@
         <div id="nav-wrapper">
             <div id="nav">
                 <div class="nav-link">
-                    <a href="{{ route('home.index') }}" class="active">Home</a>
+                    <a class="{{ request()->routeIs('home.index') ? 'active' : '' }}" href="{{ route('home.index') }}">Home</a>
                 </div>
 
                 <div class="nav-link">
-                    <a href="{{ route('search.index') }}">Search</a>
+                    <a class="{{ request()->routeIs('search.index') ? 'active' : '' }}" href="{{ route('search.index') }}">Search</a>
                 </div>
 
                 <div class="nav-link">
-                    <a href="{{ route('contact.index') }}">Contact</a>
+                    <a class="{{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Contact</a>
                 </div>
 
                 @if (Auth::check())
@@ -50,7 +50,9 @@
                         @csrf
                     </form>
                 @else
-                    <div class="nav-link"><a href="{{ route('auth.index') }}">Login</a></div>
+                    <div class="nav-link">
+                        <a class="{{ request()->routeIs('auth.index') ? 'active' : '' }}" href="{{ route('auth.index') }}">Login</a>
+                    </div>
                 @endif
             </div>
         </div>

@@ -12,14 +12,22 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             // $user = Auth::user()->with[('favorites')]->get();
+
+            // $user = User::with(['favorites'])
+            //     ->where()
+            //     ->first();
+
+            // $user = Auth::user()->load('favorites');
+
             $user = Auth::user();
             
             return view('home.index', [
-                'favorites' => $user->favorites
+                'user' => $user,
+                'favorites' => $user->favorites,
             ]);
         } else {
             return view('home.index', [
-                'favorites' => collect()
+                'favorites' => collect(),
             ]);
         }
     }
