@@ -1,52 +1,5 @@
 import './bootstrap';
 
-/**** Login/Sign Up ****/
-document.addEventListener("DOMContentLoaded", function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    
-    if (urlParams.get('login-error') === 'true') {
-        var errorMessageDiv = document.getElementById('login-error-message');
-        errorMessageDiv.style.display = 'block';
-    }
-    else {
-		var errorMessageDiv = document.getElementById('login-error-message');
-        errorMessageDiv.style.display = 'none';
-    }
-    
-    if (urlParams.get('signup-error') === 'true') {
-        var errorMessageDiv = document.getElementById('signup-error-message');
-        errorMessageDiv.innerHTML = "An account with that username or email already exists";
-        errorMessageDiv.style.display = 'block';
-    }
-    else {
-		var errorMessageDiv = document.getElementById('signup-error-message');
-        errorMessageDiv.innerHTML = "";
-    }
-    
-    var signupForm = document.getElementById("signup-form");
-
-    signupForm.addEventListener("submit", function(event) {
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("signup-password").value;
-        var confirmPassword = document.getElementById("confirm-password").value;
-        var terms = document.getElementById("terms").checked;
-        var errorMessage = "";
-
-        if (!email.includes('@') || email.lastIndexOf('@') === email.length - 1) {
-            errorMessage += "Email must contain an '@' and a domain name";
-        } else if (password !== confirmPassword) {
-            errorMessage += "Passwords do not match. ";
-        } else if (!terms) {
-            errorMessage += "You must agree to the terms and conditions. ";
-        }
-
-        if (errorMessage.length > 0) {
-            event.preventDefault();
-            document.getElementById("signup-error-message").innerHTML = errorMessage;
-        }
-    });
-});
-
 /**** Search ****/
 let search_button = document.getElementById("search-button");
 search_button.addEventListener('click', function(event) {

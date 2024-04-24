@@ -11,7 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $user = Auth::user()->with[('favorites')]->first();
+            // $user = Auth::user()->with[('favorites')]->get();
+            $user = Auth::user();
             
             return view('home.index', [
                 'favorites' => $user->favorites

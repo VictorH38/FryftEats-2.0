@@ -5,13 +5,15 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
+use App\Http\Middleware\Authenticate;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // Authentication
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login.post');
+Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Search Page

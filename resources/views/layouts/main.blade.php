@@ -44,13 +44,13 @@
                     <a href="{{ route('contact.index') }}">Contact</a>
                 </div>
 
-                @if (session('username'))
+                @if (Auth::check())
                     <div class="nav-link"><a href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></div>
                     <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 @else
-                    <div class="nav-link"><a href="{{ route('auth.login') }}">Login</a></div>
+                    <div class="nav-link"><a href="{{ route('auth.index') }}">Login</a></div>
                 @endif
             </div>
         </div>
