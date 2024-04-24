@@ -12,23 +12,13 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             $userId = Auth::id();
-            $user = User::with('favorites')->find($userId);
+            $user = User::find($userId);
             
             return view('home.index', [
                 'user' => $user,
-                'favorites' => $user->favorites,
             ]);
         } else {
-            return view('home.index', [
-                'favorites' => collect(),
-            ]);
+            return view('home.index');
         }
-    }
-
-    public function removeFromFavorites($restaurantId)
-    {
-        $userId = Auth::id();
-        $user = User::find($userId);
-        $user->favorites()->detach($restaurantId);
     }
 }

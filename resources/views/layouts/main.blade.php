@@ -42,6 +42,10 @@
                 </div>
 
                 <div class="nav-link">
+                    <a class="{{ request()->routeIs('favorites.index') ? 'active' : '' }}" href="{{ route('favorites.index') }}">Favorites</a>
+                </div>
+
+                <div class="nav-link">
                     <a class="{{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Contact</a>
                 </div>
 

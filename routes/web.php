@@ -4,11 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ContactController;
-
-// Home Page
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::post('/removeFromFavorites/{restaurantId}', [HomeController::class, 'removeFromFavorites'])->name('home.removeFromFavorites')->middleware('auth');
 
 // Authentication
 Route::group(['middleware' => 'guest'], function () {
@@ -18,9 +15,16 @@ Route::group(['middleware' => 'guest'], function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+// Home Page
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 // Search Page
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 Route::post('/toggleFavorite/{restaurantId}', [SearchController::class, 'toggleFavorite'])->name('search.toggleFavorite')->middleware('auth');
+
+// Favorties Page
+Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites.index');
+Route::post('/removeFromFavorites/{restaurantId}', [FavoritesController::class, 'removeFromFavorites'])->name('favorites.removeFromFavorites')->middleware('auth');
 
 // Contact Page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

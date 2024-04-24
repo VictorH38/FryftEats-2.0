@@ -149,12 +149,6 @@ body {
 	border-radius: 20px;
 }
 
-#user-content {
-	margin-top: 20px;
-	text-align: center;
-	color: white;
-}
-
 /*===== Search =====*/
 .search-container {
     display: flex;
@@ -254,6 +248,16 @@ body {
 }
 
 /*===== Favorites =====*/
+#favorites-content  {
+	margin-top: 100px;
+}
+
+#user-content {
+	margin-top: 20px;
+	text-align: center;
+	color: white;
+}
+
 .favorites-button {
 	font-family: 'FontAwesome', sans-serif;
 	padding: 10px 20px;
