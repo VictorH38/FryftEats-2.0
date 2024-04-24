@@ -9,6 +9,7 @@ use App\Http\Middleware\Authenticate;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::post('/removeFromFavorites/{restaurantId}', [HomeController::class, 'removeFromFavorites'])->name('home.removeFromFavorites')->middleware('auth');
 
 // Authentication
 Route::group(['middleware' => 'guest'], function () {

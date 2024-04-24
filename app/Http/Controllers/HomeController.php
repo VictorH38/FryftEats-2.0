@@ -11,15 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            // $user = Auth::user()->with[('favorites')]->get();
-
-            // $user = User::with(['favorites'])
-            //     ->where()
-            //     ->first();
-
-            // $user = Auth::user()->load('favorites');
-
-            $user = Auth::user();
+            $userId = Auth::id();
+            $user = User::with('favorites')->find($userId);
             
             return view('home.index', [
                 'user' => $user,
@@ -30,5 +23,12 @@ class HomeController extends Controller
                 'favorites' => collect(),
             ]);
         }
+    }
+
+    public function removeFromFavorites($restaurantId)
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $user->favorites()->detach($restaurantId);
     }
 }

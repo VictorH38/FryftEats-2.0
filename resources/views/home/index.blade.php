@@ -18,66 +18,76 @@
         <div id="background"></div>
 
         <div id="user-content">
-            @if (session('username'))
-                <h1>Hi, {{ session('username') }}!</h1>
-
+            @auth
+                <h1>Hi, {{ $user->first_name }}!</h1>
+        
                 @if ($favorites->count() > 0)
                     <h3>Here are your favorite restaurants</h3>
                 @else
-                    <h3>You have no favorite restaurants to display</h3>
+                    <h3>You have no favorite restaurants</h3>
                 @endif
             @else
                 <h3>Login or Sign Up to add restaurants to your favorites list</h3>
-            @endif
+            @endauth
         </div>
 
         <div class="restaurant-grid">
-            @if (session('username') && $favorites->count() > 0)
-                @foreach ($favorites as $restaurant)
-                    <div id="{{ str_slug($restaurant->name) }}" class="card">
-                        <img src="{{ $restaurant->image_url ?: asset('images/no-image.jpeg') }}" alt="{{ $restaurant->name }}" class="restaurant-photo"/>
-                        <h3 class="restaurant-name">{{ $restaurant->name }}</h3>
-                        <p class="restaurant-address">{{ $restaurant->address }}</p>
-                        <p class="restaurant-phone">{{ $restaurant->phone_number }}</p>
-                        <p class="restaurant-rating">
-                            @for ($i = 0; $i < floor($restaurant->rating); $i++)
-                                <span class="fa fa-star star"></span>
-                            @endfor
-                            @if ($restaurant->rating - floor($restaurant->rating) >= 0.5)
-                                <span class="fa fa-star-half star"></span>
-                            @endif
-                        </p>
-                        <button class="favorites-button" onclick="removeFromFavorites('{{ $restaurant->name }}')">
-                            <span class="fa fa-star"></span> Remove from Favorites
-                        </button>
-                    </div>
-                @endforeach
-            @endif
+            @auth
+                @if ($favorites->count() > 0)
+                    @foreach ($favorites as $restaurant)
+                        <div id="home-restaurant-{{ $restaurant->id }}" class="card">
+                            <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}" class="restaurant-photo">
+                            <h3 class="restaurant-name">{{ $restaurant->name }}</h3>
+                            <p class="restaurant-address">{{ $restaurant->address }}</p>
+                            <p class="restaurant-phone">{{ $restaurant->phone_number }}</p>
+                            <p class="restaurant-rating">
+                                @for($i = 0; $i < floor($restaurant->rating); $i++)
+                                    <span class="fa fa-star star"></span>
+                                @endfor
+                                @if($restaurant->rating - floor($restaurant->rating) >= 0.5)
+                                    <span class="fa fa-star-half-o"></span>
+                                @endif
+                            </p>
+        
+                            @auth
+                                @php
+                                    $isFavorite = $user->favorites()->where('restaurant_id', $restaurant->id)->exists();
+                                @endphp
+        
+                                <button class="favorites-button" data-restaurant-id="{{ $restaurant->id }}">
+                                    <span class="fa fa-star"></span> Remove from Favorites
+                                </button>
+                            @endauth
+                        </div>
+                    @endforeach
+                @endif
+            @endauth
         </div>
     </div>
 @endsection
 
 @section('script')
     <script>
-        function removeFromFavorites(restaurantName) {
-            var favUrl = new URL(window.location.href);
-            favUrl.pathname = '/FryftEats/removeFromFavorites.php';
-            favUrl.search = 'name=' + encodeURIComponent(restaurantName);
+        document.querySelectorAll('.favorites-button').forEach(button => {
+            button.addEventListener('click', function() {
+                removeFromFavorites(this);
+            });
+        });
 
-            fetch(favUrl, { method: 'GET' })
-                .then(response => {
-                    if (response.ok) {
-                        restauarant_id = restaurantName.replace(/ /g, "-");
-                        let restaurant_card = document.getElementById(restauarant_id);
+        function removeFromFavorites(button) {
+            const restaurantId = button.getAttribute('data-restaurant-id');
+            const card = document.getElementById(`home-restaurant-${restaurantId}`);
 
-                        if (restaurant_card) {
-                            let grid = document.querySelector('.restaurant-grid');
-                            grid.removeChild(restaurant_card);
-                        }
+            card.style.display = 'none';
 
-                    }
-                })
-                .catch(err => console.error('Error removing from favorites:', err));
+            fetch(`/removeFromFavorites/${restaurantId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
     </script>
 @endsection
