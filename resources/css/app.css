@@ -238,7 +238,8 @@ body {
     display: block;
 }
 
-.restaurant-name, .restaurant-address, .restaurant-phone, .restaurant-rating {
+.restaurant-name, .restaurant-address, .restaurant-phone, .restaurant-rating, .time-added {
+	margin: 0px;
     padding: 8px;
 }
 

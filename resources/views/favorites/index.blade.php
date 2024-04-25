@@ -44,6 +44,7 @@
                                     <span class="fa fa-star-half-o"></span>
                                 @endif
                             </p>
+                            <p class="time-added">Added {{ $restaurant->pivot->created_at->diffForHumans() }}</p>
         
                             @auth
                                 @php

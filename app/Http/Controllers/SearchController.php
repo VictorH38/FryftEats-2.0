@@ -84,7 +84,7 @@ class SearchController extends Controller
         if ($isFavorite) {
             $user->favorites()->detach($restaurantId);
         } else {
-            $user->favorites()->attach($restaurantId);
+            $user->favorites()->attach($restaurantId, ['created_at' => now()]);
         }
     }
 }

@@ -12,8 +12,10 @@ class FavoritesController extends Controller
     {
         if (Auth::check()) {
             $userId = Auth::id();
-            $user = User::with('favorites')->find($userId);
-            
+            $user = User::with(['favorites' => function($query) {
+                $query->orderBy('pivot_created_at', 'desc')->get();
+            }])->find($userId);
+
             return view('favorites.index', [
                 'user' => $user,
                 'favorites' => $user->favorites,
