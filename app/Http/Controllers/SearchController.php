@@ -57,7 +57,7 @@ class SearchController extends Controller
                     [
                         'name' => $item['name'],
                         'address' => implode(", ", $item['location']['display_address']),
-                        'phone_number' => $item['phone'],
+                        'phone_number' => $item['display_phone'],
                         'cuisine' => collect($item['categories'])->pluck('title')->implode(', '),
                         'rating' => $item['rating'],
                         'price' => $item['price'] ?? null,

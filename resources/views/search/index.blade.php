@@ -37,7 +37,7 @@
             <div class="restaurant-grid">
                 @foreach($results as $restaurant)
                     <div class="card">
-                        <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}" class="restaurant-photo">
+                        <img src="{{ $restaurant->image_url ?: asset('images/no-image.jpeg') }}" alt="{{ $restaurant->name }}" class="restaurant-photo">
                         <h3 class="restaurant-name">{{ $restaurant->name }}</h3>
                         <p class="restaurant-address">{{ $restaurant->address }}</p>
                         <p class="restaurant-phone">{{ $restaurant->phone_number }}</p>

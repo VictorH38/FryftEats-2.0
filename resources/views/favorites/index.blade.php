@@ -32,7 +32,7 @@
                 @if ($favorites->count() > 0)
                     @foreach ($favorites as $restaurant)
                         <div id="home-restaurant-{{ $restaurant->id }}" class="card">
-                            <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}" class="restaurant-photo">
+                            <img src="{{ $restaurant->image_url ?: asset('images/no-image.jpeg') }}" alt="{{ $restaurant->name }}" class="restaurant-photo">
                             <h3 class="restaurant-name">{{ $restaurant->name }}</h3>
                             <p class="restaurant-address">{{ $restaurant->address }}</p>
                             <p class="restaurant-phone">{{ $restaurant->phone_number }}</p>
