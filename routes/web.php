@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ContactController;
 
 // Authentication
@@ -25,6 +26,9 @@ Route::post('/toggleFavorite/{restaurantId}', [SearchController::class, 'toggleF
 // Favorties Page
 Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites.index');
 Route::post('/removeFromFavorites/{restaurantId}', [FavoritesController::class, 'removeFromFavorites'])->name('favorites.removeFromFavorites')->middleware('auth');
+
+// Restaurant Page
+Route::get('/restaurants/{id}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 // Contact Page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
