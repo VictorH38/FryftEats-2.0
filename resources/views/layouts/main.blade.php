@@ -45,10 +45,6 @@
                     <a class="{{ request()->routeIs('favorites.index') ? 'active' : '' }}" href="{{ route('favorites.index') }}">Favorites</a>
                 </div>
 
-                <div class="nav-link">
-                    <a class="{{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Contact</a>
-                </div>
-
                 @if (Auth::check())
                     <div class="nav-link"><a href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></div>
                     <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
@@ -64,6 +60,13 @@
     </div>
 
     @yield('main')
+
+    <footer id="footer">
+        <div class="footer-content">
+            <span>© {{ date('Y') }} FryftEats. All rights reserved.</span>
+            <a href="{{ route('contact.index') }}">Contact Us</a>
+        </div>
+    </footer>
 
     @yield('script')
 </body>

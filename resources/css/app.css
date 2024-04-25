@@ -1,7 +1,11 @@
 /*===== Styles =====*/
 body {
+	min-height: 100vh;
 	font-family: 'Poppins', sans-serif;
 	background-color: #990000;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 @font-face {
@@ -36,7 +40,7 @@ body {
 	text-decoration: none;
 }
 
-/*===== Nav =====*/
+/*===== Navigation =====*/
 #nav {
 	margin: 0px;
 	padding: 0px;
@@ -45,9 +49,8 @@ body {
 }
 
 .nav-link {
-	margin: 0px;
+	margin: 0px 0px 0px 3vw;
 	padding: 0px;
-	width: 125px;
 	text-align: center;
 }
 
@@ -315,4 +318,29 @@ body {
 #send-button:hover {
 	background-color: darkgoldenrod;
 	transition: all 0.3s ease;
+}
+
+/*===== Footer =====*/
+#footer {
+    background-color: grey;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content a {
+    color: #fff;
+    text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
 }
