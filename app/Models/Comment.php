@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Favorite extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -17,25 +16,27 @@ class Favorite extends Model
      */
     protected $fillable = [
         'user_id',
-        'restaurant_id'
+        'restaurant_id',
+        'body',
+        'created_at',
     ];
 
     /**
-     * Get the user associated with this favorite.
+     * Get the user that made the comment.
      *
-     * @return BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Get the restaurant associated with this favorite.
+     * Get the restaurant associated with the comment.
      *
-     * @return BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function restaurant(): BelongsTo
+    public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);
     }

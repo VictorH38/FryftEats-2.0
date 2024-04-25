@@ -9,6 +9,11 @@ class Restaurant extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'address',
@@ -28,5 +33,15 @@ class Restaurant extends Model
     public function favoredBy()
     {
         return $this->belongsToMany(User::class, 'favorites', 'restaurant_id', 'user_id');
+    }
+
+    /**
+     * Get all comments associated with the restaurant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
 }

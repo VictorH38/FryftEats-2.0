@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Restaurant::class, 'favorites', 'user_id', 'restaurant_id')->withTimestamps();
     }
+
+    /**
+     * Retrieve all the comments made by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

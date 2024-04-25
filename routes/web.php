@@ -7,6 +7,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController;
 
 // Authentication
 Route::group(['middleware' => 'guest'], function () {
@@ -29,6 +30,11 @@ Route::post('/removeFromFavorites/{restaurantId}', [FavoritesController::class, 
 
 // Restaurant Page
 Route::get('/restaurants/{id}', [RestaurantController::class, 'show'])->name('restaurants.show');
+
+// Comments Section
+Route::post('/restaurants/{restaurantId}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::patch('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 // Contact Page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
