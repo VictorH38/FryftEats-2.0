@@ -646,25 +646,43 @@ body {
 
 /*===== Footer =====*/
 #footer {
+	margin-top: 200px;
+	padding: 20px;
+    width: 100%;
     background-color: grey;
     color: white;
     text-align: center;
-    padding: 20px;
-    width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 .footer-content {
+	width: 80%;
     display: flex;
-    justify-content: space-evenly;
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
     align-items: center;
 }
 
-.footer-content a {
+#footer-links {
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	border-bottom: 1px solid black;
+}
+
+#footer-links a {
+	margin: 0px 20px;
     color: #fff;
     text-decoration: none;
 	transition: all 0.3s ease;
 }
 
-.footer-content a:hover {
+#footer-links a:hover {
     text-decoration: underline;
 }

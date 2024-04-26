@@ -63,9 +63,12 @@
 
     <footer id="footer">
         <div class="footer-content">
+            <div id="footer-links">
+                <a href="{{ route('contact.index') }}">Contact Us</a>
+                <a href="{{ route('reports.create') }}">Report a Restaurant</a>
+            </div>
+            
             <span>© {{ date('Y') }} FryftEats. All rights reserved.</span>
-            <a href="{{ route('contact.index') }}">Contact Us</a>
-            <a href="{{ route('reports.create') }}">Report a Restaurant</a>
         </div>
     </footer>
 
