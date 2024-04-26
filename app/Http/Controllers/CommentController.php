@@ -36,10 +36,10 @@ class CommentController extends Controller
                 'body' => $request->body
             ]);
 
-            return back()->with('success', 'Comment updated successfully.');
+            return response()->json(['success' => true, 'message' => 'Comment updated successfully']);
         }
-
-        return back()->with('error', 'Comment not found or you do not have permission to edit it.');
+    
+        return response()->json(['success' => false, 'message' => 'There was an error updating your comment'], 422);
     }
 
     public function destroy($id)
@@ -47,9 +47,9 @@ class CommentController extends Controller
         $comment = Comment::where('id', $id)->where('user_id', Auth::id())->first();
         if ($comment) {
             $comment->delete();
-            return back()->with('success', 'Comment deleted successfully.');
+            return response()->json(['success' => true, 'message' => 'Comment deleted successfully']);
         }
-
-        return back()->with('error', 'Your comment could not be deleted');
+    
+        return response()->json(['success' => false, 'message' => 'Your comment could not be deleted'], 422);
     }
 }

@@ -3,12 +3,6 @@
 @section('description', "Learn more about " . $restaurant->name . " and why it's popular among USC students.")
 @section('title', $restaurant->name)
 
-@section('style')
-    <style>
-        
-    </style>
-@endsection
-
 @section('main')
     <div id="restaurant-details-content">
         <div class="restaurant-details">
@@ -41,6 +35,12 @@
         <div class="comments-section">
             <h5>Comments</h5>
 
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             @auth
                 <form id="comment-form" action="{{ route('comments.store', $restaurant->id) }}" method="POST">
                     @csrf
@@ -48,6 +48,8 @@
                     <button id="comment-button" type="submit">Post</button>
                 </form>
             @endauth
+
+            <div id="comment-alert-container"></div>
         
             <div class="comment-list">
                 @foreach($restaurant->comments as $comment)
@@ -77,6 +79,20 @@
 
 @section('script')
     <script>
+        function showAlert(message, type = 'success') {
+            const alertContainer = document.getElementById('comment-alert-container');
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+
+            alertContainer.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 10000);
+        }
+
         function editComment(commentId) {
             let commentTextElement = document.getElementById(`comment-text-${commentId}`);
             let currentText = commentTextElement.innerText;
@@ -91,13 +107,6 @@
             let editedTextElement = document.getElementById(`edit-field-${commentId}`);
             let editedText = editedTextElement.value;
 
-            let commentTextElement = document.getElementById(`comment-text-${commentId}`);
-            commentTextElement.innerHTML = `${editedText}`;
-
-            let editCommentButton = document.getElementById(`edit-comment-button-${commentId}`);
-            editCommentButton.onclick = () => editComment(commentId);
-            editCommentButton.innerHTML = "Edit";
-
             fetch(`/comments/${commentId}`, {
                 method: 'POST',
                 headers: {
@@ -106,13 +115,26 @@
                 },
                 body: JSON.stringify({ body: editedText, _method: 'PATCH' })
             })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let commentTextElement = document.getElementById(`comment-text-${commentId}`);
+                    commentTextElement.innerHTML = `${editedText}`;
+
+                    let editCommentButton = document.getElementById(`edit-comment-button-${commentId}`);
+                    editCommentButton.onclick = () => editComment(commentId);
+                    editCommentButton.innerHTML = "Edit";
+
+                    showAlert(data.message, 'success');
+                } else {
+                    showAlert(data.message, 'danger');
+                }
+            })
             .catch(error => console.error('Error:', error));
         }
 
         function deleteComment(button) {
             const commentId = button.getAttribute('data-comment-id');
-
-            button.closest('.comment').style.display = 'none';
 
             fetch(`/comments/${commentId}`, {
                 method: 'DELETE',
@@ -120,6 +142,15 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Content-Type': 'application/json'
                 },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    button.closest('.comment').style.display = 'none';
+                    showAlert(data.message, 'success');
+                } else {
+                    showAlert(data.message, 'danger');
+                }
             })
             .catch(error => console.error('Error:', error));
         }
