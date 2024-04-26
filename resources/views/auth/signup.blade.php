@@ -1,6 +1,6 @@
 @extends('layouts/main')
 
-@section('description', "Log in to FryftEats to personalize your restaurant finding experience! Access your favorite restaurants, save new ones, and explore the best of USC's Fryft Zone dining with just a few clicks.")
+@section('description', "Sign up for FryftEats to personalize your restaurant finding experience! Access your favorite restaurants, save new ones, and explore the best of USC's Fryft Zone dining with just a few clicks.")
 @section('title', 'Login')
 
 @section('style')

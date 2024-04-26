@@ -147,6 +147,49 @@ body {
 	border-radius: 20px;
 }
 
+#about-title {
+	margin: 50px auto 0px;
+	padding-bottom: 5px;
+    width: 80vw;
+	color: white;
+	border-bottom: 1px solid black;
+}
+
+#welcome-message {
+	margin: 0px auto 50px;
+	padding-top: 5px;
+    width: 80vw;
+	color: white;
+}
+
+#fryft-zone-content {
+	margin: 0px auto 100px;
+	width: 80vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#fryft-zone-image {
+	width: 40%;
+	height: auto;
+	border-radius: 8px;
+}
+
+#fryft-zone-message {
+	margin-left: 20px;
+	color: white;
+}
+
+#fryft-zone-message a {
+	color: white;
+	transition: all 0.3s ease;
+}
+
+#fryft-zone-message a:hover {
+	color: black;
+}
+
 /*===== Search =====*/
 .search-container {
     display: flex;
