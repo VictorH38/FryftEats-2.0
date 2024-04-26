@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReportController;
 
 // Authentication
 Route::group(['middleware' => 'guest'], function () {
@@ -39,3 +40,9 @@ Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('co
 // Contact Page
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+
+// Reports
+Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+Route::patch('/reports/{id}', [ReportController::class, 'update'])->name('reports.update');
+Route::delete('/reports/{id}', [ReportController::class, 'destroy'])->name('reports.destroy');

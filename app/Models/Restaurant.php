@@ -44,4 +44,14 @@ class Restaurant extends Model
     {
         return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
+
+    /**
+     * Get all reports associated with the restaurant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reports()
+    {
+        return $this->hasMany(Report::class)->orderBy('created_at', 'desc');
+    }
 }
