@@ -18,14 +18,14 @@
                 @csrf
                 <div class="report-row">
                     <label for="restaurant-search">Restaurant:</label>
-                    <input type="text" id="restaurant-search" autocomplete="off" placeholder="Start typing a restaurant..." value="{{ $selectedRestaurant ? $selectedRestaurant->name : '' }}">
+                    <input type="text" id="restaurant-search" autocomplete="off" placeholder="Start typing a restaurant..." value="{{ $selectedRestaurant ? $selectedRestaurant->name : '' }}" required>
                     <div id="restaurant-list" class="restaurant-dropdown"></div>
                     <input type="hidden" name="restaurant_id" id="selected-restaurant-id" value="{{ $selectedRestaurant ? $selectedRestaurant->id : '' }}">
                 </div>
 
                 <div class="report-row">
                     <label for="reason">Reason for report:</label>
-                    <select id="reason" id="reason-dropdown" name="reason">
+                    <select id="reason" id="reason-dropdown" name="reason" required>
                         <option value="" disabled selected>-- Select Reason --</option>
                         <option value="Outside of Fryft zone">Outside of Fryft zone</option>
                         <option value="Inaccurate information">Inaccurate information</option>

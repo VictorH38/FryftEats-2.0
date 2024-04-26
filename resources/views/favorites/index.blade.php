@@ -6,7 +6,7 @@
 @section('style')
     <style>
         .restaurant-grid {
-            margin-top: 20px;
+            margin: 20px 0px 100px;
         }
     </style>
 @endsection

@@ -6,36 +6,40 @@
 @section('main')
     <div id="restaurant-details-content">
         <div class="restaurant-details">
-            <div id="restaurant-details-column-1">
+            <div id="restaurant-details-row-1">
                 <h2>{{ $restaurant->name }}</h2>
-
-                <img src="{{ $restaurant->image_url ?: asset('images/no-image.jpeg') }}" alt="{{ $restaurant->name }}" class="restaurant-image">
             </div>
 
-            <div id="restaurant-details-column-2">
-                <div id="restaurant-info">
-                    <p class="detail"><strong>Address:</strong> {{ $restaurant->address }}</p>
-                    <p class="detail"><strong>Phone:</strong> {{ $restaurant->phone_number }}</p>
-                    <p class="detail"><strong>Cuisine:</strong> {{ $restaurant->cuisine }}</p>
-                    <p class="detail">
-                        <strong>Rating:</strong>
-                        <span class="rating">
-                            @for($i = 0; $i < floor($restaurant->rating); $i++)
-                                <span class="fa fa-star star"></span>
-                            @endfor
-                            @if($restaurant->rating - floor($restaurant->rating) >= 0.5)
-                                <span class="fa fa-star-half-o"></span>
-                            @endif
-                        </span>
-                    </p>
-                    <p class="detail"><strong>Price:</strong> <span class="price">{{ $restaurant->price }}</span></p>
-                    <p class="detail"><strong>More Info:</strong> <a href="{{ $restaurant->url }}" target="_blank">Visit Website</a></p>
+            <div id="restaurant-details-row-2">
+                <div id="restaurant-details-column-1">
+                    <img src="{{ $restaurant->image_url ?: asset('images/no-image.jpeg') }}" alt="{{ $restaurant->name }}" class="restaurant-image">
                 </div>
 
-                <div id="restaurant-buttons">
-                    <button id="lyft-button" class="restaurant-button">Download our app to request a Lyft</button>
+                <div id="restaurant-details-column-2">
+                    <div id="restaurant-info">
+                        <p class="detail"><strong>Address:</strong> {{ $restaurant->address }}</p>
+                        <p class="detail"><strong>Phone:</strong> {{ $restaurant->phone_number }}</p>
+                        <p class="detail"><strong>Cuisine:</strong> {{ $restaurant->cuisine }}</p>
+                        <p class="detail">
+                            <strong>Rating:</strong>
+                            <span class="rating">
+                                @for($i = 0; $i < floor($restaurant->rating); $i++)
+                                    <span class="fa fa-star star"></span>
+                                @endfor
+                                @if($restaurant->rating - floor($restaurant->rating) >= 0.5)
+                                    <span class="fa fa-star-half-o"></span>
+                                @endif
+                            </span>
+                        </p>
+                        <p class="detail"><strong>Price:</strong> <span class="price">{{ $restaurant->price }}</span></p>
+                        <p class="detail"><strong>More Info:</strong> <a href="{{ $restaurant->url }}" target="_blank">Visit Website</a></p>
+                    </div>
 
-                    <a id="restaurant-report-button" class="restaurant-button" href="{{ route('reports.create', ['restaurant_id' => $restaurant->id]) }}">Report</a>
+                    <div id="restaurant-buttons">
+                        <button id="lyft-button" class="restaurant-button">Download our app to request a Lyft</button>
+
+                        <a id="restaurant-report-button" class="restaurant-button" href="{{ route('reports.create', ['restaurant_id' => $restaurant->id]) }}">Report</a>
+                    </div>
                 </div>
             </div>
         </div>

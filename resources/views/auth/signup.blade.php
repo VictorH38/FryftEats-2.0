@@ -10,7 +10,9 @@
             padding: 50px 70px;
             display: flex;
             justify-content: center;
-            background-color: lightgray;
+            background-color: #851515;
+            color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             border-radius: 30px;
         }
 
@@ -23,7 +25,6 @@
 
         .form-row label {
             margin: 7px 0px;
-            color: black;
         }
 
         .form-row input {

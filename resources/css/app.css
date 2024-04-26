@@ -80,7 +80,6 @@ body {
 
 #login-title, #signup-title {
 	margin: 20px 0px;
-	color: black;
 	font-size: 30px;
 }
 
@@ -88,7 +87,7 @@ body {
 	margin-bottom: 30px;
 	font-family: 'FontAwesome', sans-serif;
 	width: 100%;
-    background-color: #990000;
+    background-color: grey;
     color: white;
     border: none;
     padding: 10px;
@@ -97,24 +96,38 @@ body {
 }
 
 .sign-in-button:hover {
-	background-color: #6c0202;
+	background-color: black;
 }
 
 .create-account-button:hover {
-	background-color: #6c0202;
+	background-color: black;
 }
 
 #login-message, #signup-message {
+	color: white;
 	text-align: center;
+}
+
+#login-message a, #signup-message a {
+	color: white;
+	transition: all 0.3s ease;
+}
+
+#login-message a:hover {
+	color: black;
+}
+
+#signup-message a:hover {
+	color: black;
 }
 
 .error-message {
 	margin: 0px;
-	color: red;
+	color: black;
 }
 
 #login-error-message, #signup-error-message {
-	color: red;
+	color: black;
 }
 
 /*===== Home =====*/
@@ -198,7 +211,7 @@ body {
 
 /*===== Pagination =====*/
 #search-pagination-container {
-	margin-top: 20px;
+	margin: 20px 0px 100px;
 	width: 100%;
 	display: flex;
     justify-content: center;
@@ -324,7 +337,8 @@ body {
 	max-width: 900px;
 	margin: 100px auto;
 	padding: 20px;
-	background: #f9f9f9;
+	background-color: #851515;
+	color: white;
 	border-radius: 8px;
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
@@ -332,19 +346,23 @@ body {
 .restaurant-details {
 	width: 100%;
 	display: flex;
+	flex-direction: column;
+}
+
+#restaurant-details-row-1 {
+	width: 100%;
+}
+
+#restaurant-details-row-2 {
+	padding-bottom: 45px;
+	width: 100%;
+	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 }
 
 #restaurant-details-column-1 {
 	width: 50%;
-}
-
-#restaurant-details-column-2 {
-	padding: 45px 15px;
-	width: 50%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 }
 
 .restaurant-image {
@@ -354,10 +372,27 @@ body {
 	border-radius: 8px;
 }
 
+#restaurant-details-column-2 {
+	padding: 0px 15px;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
 .detail {
 	margin: 10px 0;
 	font-size: 16px;
-	color: #333;
+	color: white;
+}
+
+.detail a {
+	color: white;
+	transition: all 0.3s ease;
+}
+
+.detail a:hover {
+	color: black;
 }
 
 .rating {
@@ -378,7 +413,8 @@ body {
 }
 
 #lyft-button {
-	padding: 5px 0px;
+	padding: 5px 10px;
+	width: 75%;
 	background-color: #ff00bf;
 	color: white;
 	border: none;
@@ -393,7 +429,7 @@ body {
 #restaurant-report-button {
 	width: 30%;
 	padding: 5px 0px;
-	background-color: red;
+	background-color: grey;
 	color: white;
 	border-radius: 5px;
 	text-align: center;
@@ -402,7 +438,7 @@ body {
 }
 
 #restaurant-report-button:hover {
-	background-color: rgb(183, 2, 2);
+	background-color: black;
 }
 
 /*===== Comments Section =====*/
@@ -427,6 +463,7 @@ body {
 	height: 40px;
     padding: 5px 10px;
 	background-color: deepskyblue;
+	color: white;
 	border: none;
 	border-radius: 5px;
 	transition: all 0.3s ease;
@@ -438,12 +475,13 @@ body {
 
 .comment-list {
 	margin-top: 30px;
-	background-color: #f0f0f0;
+	background-color: white;
 	border-radius: 5px;
 }
 
 .comment-list .comment {
     padding: 10px 10px 0px 10px;
+	color: black;
 }
 
 .comment-row-1 {
@@ -486,6 +524,7 @@ body {
 	margin-bottom: 10px;
 	height: 25px;
 	background-color: deepskyblue;
+	color: white;
 	border: none;
 	border-radius: 5px;
 	transition: all 0.3s ease;
@@ -498,7 +537,7 @@ body {
 .delete-comment-button {
 	margin-bottom: 10px;
 	height: 25px;
-	background-color: red;
+	background-color: grey;
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -506,7 +545,7 @@ body {
 }
 
 .delete-comment-button:hover {
-	background-color: maroon;
+	background-color: black;
 }
 
 #comment-alert-container {
@@ -592,13 +631,18 @@ body {
 	width: 900px;
 	margin: 100px auto;
 	padding: 20px;
-	background: #f9f9f9;
+	background-color: #851515;
+	color: white;
 	border-radius: 8px;
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 #make-report-text {
 	margin-bottom: 20px;
+}
+
+#report-form {
+	padding-bottom: 60px;
 }
 
 .report-row {
@@ -609,6 +653,7 @@ body {
 .restaurant-dropdown {
     position: absolute;
     background-color: #fff;
+	color: black;
     border: 1px solid #ccc;
     width: 40%;
     max-height: 300px;
@@ -647,7 +692,7 @@ body {
 
 #report-button {
 	padding: 5px 10px;
-	background-color: red;
+	background-color: grey;
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -655,11 +700,12 @@ body {
 }
 
 #report-button:hover {
-	background-color: maroon;
+	background-color: black;
 }
 
 #user-reports {
-	margin-top: 50px;
+	padding-top: 50px;
+	border-top: 1px solid black;
 }
 
 #user-reports-text {
@@ -668,12 +714,13 @@ body {
 
 .report-list {
 	margin-top: 20px;
-	background-color: #f0f0f0;
+	background-color: white;
 	border-radius: 5px;
 }
 
 .report-list .report {
     padding: 10px 10px 0px 10px;
+	color: black;
 }
 
 .report-row-1 {
@@ -746,6 +793,7 @@ body {
 	margin-bottom: 10px;
 	height: 25px;
 	background-color: deepskyblue;
+	color: white;
 	border: none;
 	border-radius: 5px;
 	transition: all 0.3s ease;
@@ -758,7 +806,7 @@ body {
 .delete-report-button {
 	margin-bottom: 10px;
 	height: 25px;
-	background-color: red;
+	background-color: grey;
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -766,7 +814,7 @@ body {
 }
 
 .delete-report-button:hover {
-	background-color: maroon;
+	background-color: black;
 }
 
 #report-alert-container {
@@ -775,7 +823,6 @@ body {
 
 /*===== Footer =====*/
 #footer {
-	margin-top: 200px;
 	padding: 20px;
     width: 100%;
     background-color: white;
