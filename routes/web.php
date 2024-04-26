@@ -12,7 +12,8 @@ use App\Http\Controllers\ReportController;
 
 // Authentication
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.showLoginForm');
+    Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('auth.showSignupForm');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/signup', [AuthController::class, 'signup'])->name('auth.signup');
 });

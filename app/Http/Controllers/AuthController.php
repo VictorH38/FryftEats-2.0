@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function index() {
-        return view('auth/index');
+    public function showLoginForm() {
+        return view('auth/login');
     }
 
     public function login(Request $request) {
@@ -24,16 +24,20 @@ class AuthController extends Controller
             return redirect()->route('home.index');
         }
     
-        return redirect()->route('auth.index')->with('loginError', 'The provided credentials do not match our records');
+        return redirect()->route('auth.login')->with(['loginError' => 'The provided credentials do not match our records'])->withInput($request->except('password'));
+    }
+
+    public function showSignupForm() {
+        return view('auth/signup');
     }
 
     public function signup(Request $request)
     {
         $messages = [
-            'username.unique:users' => 'The username is already taken',
-            'email.email' => 'The email must be a valid email address',
-            'email.unique:users' => 'The email is already taken',
-            'password.confirmed' => 'The passwords do not match'
+            'username.unique:users' => 'That username is already taken',
+            'email.email' => 'That email is not a valid email address',
+            'email.unique:users' => 'That email is already taken',
+            'password.confirmed' => 'Those passwords do not match'
         ];
     
         $validatedData = $request->validate([

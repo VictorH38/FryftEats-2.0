@@ -52,7 +52,7 @@
                     </form>
                 @else
                     <div class="nav-link">
-                        <a class="{{ request()->routeIs('auth.index') ? 'active' : '' }}" href="{{ route('auth.index') }}">Login</a>
+                        <a class="{{ request()->routeIs('auth.index') ? 'active' : '' }}" href="{{ route('auth.showLoginForm') }}">Login</a>
                     </div>
                 @endif
             </div>

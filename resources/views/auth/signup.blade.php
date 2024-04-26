@@ -9,7 +9,7 @@
             margin: 100px 70px;
             padding: 50px 70px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             background-color: lightgray;
             border-radius: 30px;
         }
@@ -38,33 +38,6 @@
 
 @section('main')
     <div id="content">
-        <div id="login">
-            <p id="login-title">Login</p>
-
-            @if(session('loginError'))
-                <p id="login-error-message">{{ session('loginError') }}</p>
-            @endif
-
-            <form id="login-form" action="{{ route('auth.login') }}" method="post">
-                @csrf
-                <div class="form-row">
-                    <label for="login-username">Username</label>
-                    <input type="text" id="login-username" name="username" required>
-                </div>
-
-                <div class="form-row">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" required>
-                </div>
-
-                <button type="submit" class="sign-in-button"><span class="fa-sign-in"></span> Sign In</button>
-            </form>
-        </div>
-
-        <div id="or-text">
-            <p>OR</p>
-        </div>
-
         <div id="signup">
             <p id="signup-title">Sign Up</p>
 
@@ -87,6 +60,10 @@
                 <div class="form-row">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+
+                    @error('email')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="form-row">
@@ -114,6 +91,10 @@
 
                 <button type="submit" class="create-account-button"><span class="fa-user-plus"></span> Create Account</button>
             </form>
+
+            <p id="login-message">
+                Already have an account? <a href="{{ route('auth.showLoginForm') }}">Login</a>
+            </p>
         </div>
     </div>
 @endsection

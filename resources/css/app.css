@@ -72,36 +72,19 @@ body {
 }
 
 /*===== Login/Sign Up =====*/
-#login {
+#login, #signup  {
 	width: 45%;
+	max-width: 400px;
 }
 
-#signup {
-	width: 45%;
-}
-
-#login-title {
+#login-title, #signup-title {
 	margin: 20px 0px;
 	color: black;
 	font-size: 30px;
 }
 
-#signup-title {
-	margin: 20px 0px;
-	color: black;
-	font-size: 30px;
-}
-
-#or-text {
-	display: flex;
-	align-items: center;
-}
-
-#or-text p {
-	font-size: 25px;
-}
-
-.sign-in-button {
+.sign-in-button, .create-account-button {
+	margin-bottom: 30px;
 	font-family: 'FontAwesome', sans-serif;
 	width: 100%;
     background-color: #990000;
@@ -109,17 +92,19 @@ body {
     border: none;
     padding: 10px;
     border-radius: 5px;
+	transition: all 0.3s ease;
 }
 
-.create-account-button {
-	font-family: 'FontAwesome', sans-serif;
-	width: 100%;
-    background-color: #990000;
-    color: white;
-    border: none;
-    margin: 30px 0px;
-    padding: 10px;
-    border-radius: 5px;
+.sign-in-button:hover {
+	background-color: #6c0202;
+}
+
+.create-account-button:hover {
+	background-color: #6c0202;
+}
+
+#login-message, #signup-message {
+	text-align: center;
 }
 
 .error-message {
@@ -127,11 +112,7 @@ body {
 	color: red;
 }
 
-#login-error-message {
-	color: red;
-}
-
-#signup-error-message {
+#login-error-message, #signup-error-message {
 	color: red;
 }
 
