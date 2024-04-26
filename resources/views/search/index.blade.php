@@ -25,6 +25,8 @@
             </form>
         </div>
 
+        <div id="search-favorite-alert-container"></div>
+
         <div id="search-text">
             @if(request('restaurant'))
                 <h2>Search results for "{{ request('restaurant') }}"</h2>
@@ -70,6 +72,20 @@
 
 @section('script')
     <script>
+        function showAlert(message, type = 'success') {
+            const alertContainer = document.getElementById('search-favorite-alert-container');
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+
+            alertContainer.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 10000);
+        }
+
         document.querySelectorAll('.favorites-button').forEach(button => {
             button.addEventListener('click', function() {
                 event.preventDefault();
@@ -81,14 +97,6 @@
             const restaurantId = button.getAttribute('data-restaurant-id');
             const isFavorite = button.getAttribute('data-favorite') === 'true';
 
-            if (!isFavorite) {
-                    button.innerHTML = '<span class="fa fa-star"></span> Remove from Favorites';
-                    button.setAttribute('data-favorite', 'true');
-            } else {
-                button.innerHTML = '<span class="fa fa-star"></span> Add to Favorites';
-                button.setAttribute('data-favorite', 'false');
-            }
-
             fetch(`/toggleFavorite/${restaurantId}`, {
                 method: 'POST',
                 headers: {
@@ -96,6 +104,20 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ isFavorite: isFavorite })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (!isFavorite) {
+                            button.innerHTML = '<span class="fa fa-star"></span> Remove from Favorites';
+                            button.setAttribute('data-favorite', 'true');
+                    } else {
+                        button.innerHTML = '<span class="fa fa-star"></span> Add to Favorites';
+                        button.setAttribute('data-favorite', 'false');
+                    }
+
+                    showAlert(data.message, 'success');
+                }
             })
             .catch(error => console.error('Error:', error));
         }

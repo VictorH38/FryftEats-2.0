@@ -80,11 +80,20 @@ class SearchController extends Controller
         $userId = Auth::id();
         $user = User::find($userId);
         $isFavorite = $request->input('isFavorite', false);
+        $restaurant = Restaurant::find($restaurantId);
 
         if ($isFavorite) {
             $user->favorites()->detach($restaurantId);
+            return response()->json([
+                'success' => true, 
+                'message' => $restaurant->name . ' was successfully removed from your favorites'
+            ]);
         } else {
             $user->favorites()->attach($restaurantId, ['created_at' => now()]);
+            return response()->json([
+                'success' => true, 
+                'message' => $restaurant->name . ' was successfully added to your favorites'
+            ]);
         }
     }
 }
