@@ -66,6 +66,10 @@
                     </a>
                 @endforeach
             </div>
+            
+            <div id="search-pagination-container" class="pagination-container">
+                {{ $results->appends(request()->query())->links() }}
+            </div>
         @endif
     </div>
 @endsection

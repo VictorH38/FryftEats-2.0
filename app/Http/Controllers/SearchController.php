@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Restaurant;
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchController extends Controller
 {
@@ -27,7 +30,7 @@ class SearchController extends Controller
                 'term' => $term,
                 'radius' => 1500,
                 'sort_by' => $sortBy,
-                'limit' => 48
+                'limit' => 50
             ];
 
             if ($price == '0') {
@@ -67,11 +70,21 @@ class SearchController extends Controller
 
                 $restaurants->push($restaurant);
             }
+
+            $perPage = 12;
+            $currentPage = $request->input('page', 1);
+            $currentItems = $restaurants->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            $paginatedItems = new LengthAwarePaginator($currentItems, $restaurants->count(), $perPage, $currentPage, [
+                'path' => $request->url(),
+                'query' => $request->query()
+            ]);
+
+            $paginatedItems->appends(['restaurant' => $term, 'price' => $price, 'sort_by' => $sortBy]);
         }
 
         return view('search.index', [
             'user' => $user,
-            'results' => $restaurants,
+            'results' => $paginatedItems ?? null,
         ]);
     }
 
