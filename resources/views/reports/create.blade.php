@@ -17,18 +17,15 @@
             <form action="{{ route('reports.store') }}" method="POST">
                 @csrf
                 <div class="report-row">
-                    <label for="restaurant_id">Restaurant:</label>
-                    <select id="restaurant_id" class="report-dropdown" name="restaurant_id">
-                        <option value="" disabled selected>-- Select Restaurant --</option>
-                        @foreach($restaurants as $restaurant)
-                            <option value="{{ $restaurant->id }}">{{ $restaurant->name }}</option>
-                        @endforeach
-                    </select>
+                    <label for="restaurant-search">Restaurant:</label>
+                    <input type="text" id="restaurant-search" autocomplete="off" placeholder="Start typing a restaurant..." value="{{ $selectedRestaurant ? $selectedRestaurant->name : '' }}">
+                    <div id="restaurant-list" class="restaurant-dropdown"></div>
+                    <input type="hidden" name="restaurant_id" id="selected-restaurant-id" value="{{ $selectedRestaurant ? $selectedRestaurant->id : '' }}">
                 </div>
 
                 <div class="report-row">
                     <label for="reason">Reason for report:</label>
-                    <select id="reason" class="report-dropdown" name="reason">
+                    <select id="reason" id="reason-dropdown" name="reason">
                         <option value="" disabled selected>-- Select Reason --</option>
                         <option value="Outside of Fryft zone">Outside of Fryft zone</option>
                         <option value="Inaccurate information">Inaccurate information</option>
@@ -84,6 +81,51 @@
 
 @section('script')
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const restaurantSearch = document.getElementById('restaurant-search');
+            const restaurantList = document.getElementById('restaurant-list');
+            const selectedRestaurantId = document.getElementById('selected-restaurant-id');
+            const restaurants = @json($restaurants);
+
+            function updateRestaurantList(filter = '') {
+                restaurantList.innerHTML = '';
+                const filteredRestaurants = restaurants.filter(restaurant =>
+                    restaurant.name.toLowerCase().includes(filter.toLowerCase())
+                );
+
+                filteredRestaurants.forEach(restaurant => {
+                    const div = document.createElement('div');
+                    div.textContent = restaurant.name;
+                    div.className = 'restaurant-item';
+                    div.dataset.id = restaurant.id;
+                    restaurantList.appendChild(div);
+                });
+            }
+
+            restaurantSearch.addEventListener('focus', function() {
+                updateRestaurantList(this.value);
+                restaurantList.style.display = 'block';
+            });
+
+            restaurantSearch.addEventListener('input', function() {
+                updateRestaurantList(this.value);
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!restaurantList.contains(event.target) && !restaurantSearch.contains(event.target)) {
+                    restaurantList.style.display = 'none';
+                }
+            });
+
+            restaurantList.addEventListener('click', function(event) {
+                if (event.target.className === 'restaurant-item') {
+                    restaurantSearch.value = event.target.textContent;
+                    selectedRestaurantId.value = event.target.dataset.id;
+                    restaurantList.style.display = 'none';
+                }
+            });
+        });
+
         function showAlert(message, type = 'success') {
             const alertContainer = document.getElementById('report-alert-container');
 

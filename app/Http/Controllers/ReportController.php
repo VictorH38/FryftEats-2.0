@@ -9,9 +9,14 @@ use App\Models\Restaurant;
 
 class ReportController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
         $restaurants = Restaurant::orderBy('name', 'asc')->get();
+        $selectedRestaurant = null;
+
+        if ($request->has('restaurant_id')) {
+            $selectedRestaurant = $restaurants->where('id', $request->restaurant_id)->first();
+        }
 
         if (Auth::check()) {
             $userId = Auth::id();
@@ -20,10 +25,17 @@ class ReportController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
     
-            return view('reports.create', compact('restaurants', 'reports'));
+            return view('reports.create', [
+                'restaurants' => $restaurants,
+                'reports' => $reports,
+                'selectedRestaurant' => $selectedRestaurant
+            ]);
         }
     
-        return view('reports.create', compact('restaurants'));
+        return view('reports.create', [
+            'restaurants' => $restaurants,
+            'selectedRestaurant' => $selectedRestaurant
+        ]);
     }
 
     public function store(Request $request)

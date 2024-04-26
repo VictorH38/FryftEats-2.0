@@ -42,7 +42,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 // Reports
-Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+Route::get('/reports/new', [ReportController::class, 'create'])->name('reports.create');
 Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
 Route::patch('/reports/{id}', [ReportController::class, 'update'])->name('reports.update');
 Route::delete('/reports/{id}', [ReportController::class, 'destroy'])->name('reports.destroy');
