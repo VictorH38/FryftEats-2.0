@@ -54,7 +54,9 @@
                     @foreach($reports as $report)
                         <div class="report">
                             <div class="report-row-1">
-                                <p class="report-restaurant">{{ $report->restaurant->name }}</p>
+                                <p class="report-restaurant">
+                                    <a id="restaurant-link-report" href="{{ route('restaurants.show', $report->restaurant->id) }}">{{ $report->restaurant->name }}</a>
+                                </p>
                                 <p class="report-submitted">Submitted {{ $report->created_at->diffForHumans() }}</p>
                             </div>
     

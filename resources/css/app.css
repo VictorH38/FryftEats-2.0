@@ -565,8 +565,15 @@ body {
 	margin: 0px;
 }
 
-.report-restaurant {
+#restaurant-link-report {
+	color: #d22f2f;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+#restaurant-link-report:hover {
 	color: #990000;
+	text-decoration: none;
 }
 
 .report-row-2 {
