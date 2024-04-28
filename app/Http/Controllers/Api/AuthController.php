@@ -5,14 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     /**
-     * Log in a user.
+     * Log in a user and return an API token.
      */
     public function login(Request $request)
     {
@@ -21,18 +19,22 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        if (Auth::attempt($request->only('username', 'password'))) {
-            $request->session()->regenerate();
-            return response()->json(['message' => 'Logged in successfully.']);
+        $user = User::where('username', $request->username)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            $token = $user->createToken('api-token')->plainTextToken;
+            return response()->json([
+                'message' => 'Logged in successfully.',
+                'token' => $token,
+                'user' => $user
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            'username' => ['The provided credentials are incorrect.']
-        ]);
+        return response()->json(['message' => 'The provided credentials are incorrect.'], 401);
     }
 
     /**
-     * Sign up a new user.
+     * Register a new user and return an API token.
      */
     public function signup(Request $request)
     {
@@ -52,18 +54,22 @@ class AuthController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        Auth::login($user);
-        return response()->json(['message' => 'User registered and logged in successfully.']);
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'User registered successfully.',
+            'token' => $token,
+            'user' => $user
+        ]);
     }
 
     /**
-     * Log out the current user.
+     * Log out the current user by revoking the token.
      */
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->user()->currentAccessToken()->delete();
+
         return response()->json(['message' => 'Logged out successfully.']);
     }
 }
