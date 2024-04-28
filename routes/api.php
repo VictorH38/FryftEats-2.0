@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\FavoritesController;
-// use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\CommentController;
 // use App\Http\Controllers\Api\ReportController;
 
 // API routes for Authentication
@@ -34,9 +34,12 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // API routes for Comments
-// Route::post('/restaurants/{restaurantId}/comments', [CommentController::class, 'store']);
-// Route::patch('/comments/{id}', [CommentController::class, 'update']);
-// Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
+Route::get('/restaurants/{restaurantId}/comments', [CommentController::class, 'index']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/restaurants/{restaurantId}/comments', [CommentController::class, 'store']);
+    Route::patch('/comments/{id}', [CommentController::class, 'update']);
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
+});
 
 // API routes for Reports
 // Route::get('/reports', [ReportController::class, 'index']);
