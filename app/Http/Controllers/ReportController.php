@@ -40,25 +40,23 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::check()) {
-            $userId = Auth::id();
-
-            $request->validate([
-                'restaurant_id' => 'required|exists:restaurants,id',
-                'reason' => 'required|string',
-                'notes' => 'nullable|string'
-            ]);
-
-            Report::create([
-                'user_id' => $userId,
-                'restaurant_id' => $request->input('restaurant_id'),
-                'reason' => $request->input('reason'),
-                'notes' => $request->input('notes'),
-                'status' => 'Pending'
-            ]);
-
-            return redirect()->back()->with('success', 'Report submitted successfully');
-        }
+        $request->validate([
+            'restaurant_id' => 'required|exists:restaurants,id',
+            'reason' => 'required|string',
+            'notes' => 'nullable|string'
+        ]);
+    
+        $userId = Auth::id();
+    
+        Report::create([
+            'user_id' => $userId,
+            'restaurant_id' => $request->input('restaurant_id'),
+            'reason' => $request->input('reason'),
+            'notes' => $request->input('notes'),
+            'status' => 'Pending'
+        ]);
+    
+        return redirect()->back()->with('success', 'Report submitted successfully');
     }
 
     public function update(Request $request, $id)

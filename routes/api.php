@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\FavoritesController;
 use App\Http\Controllers\Api\CommentController;
-// use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\ReportController;
 
 // API routes for Authentication
 Route::post('/login', [AuthController::class, 'login']);
@@ -42,7 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // API routes for Reports
-// Route::get('/reports', [ReportController::class, 'index']);
-// Route::post('/reports', [ReportController::class, 'store']);
-// Route::patch('/reports/{id}', [ReportController::class, 'update']);
-// Route::delete('/reports/{id}', [ReportController::class, 'destroy']);
+Route::post('/reports', [ReportController::class, 'store']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/reports', [ReportController::class, 'index']);
+    Route::post('/reports/authenticated', [ReportController::class, 'storeAuthenticated']);
+    Route::patch('/reports/{id}', [ReportController::class, 'update']);
+    Route::delete('/reports/{id}', [ReportController::class, 'destroy']);
+});

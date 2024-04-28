@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
-     * Display the authenticated user along with their current token.
+     * Display the authenticated user.
      */
     public function index(Request $request)
     {

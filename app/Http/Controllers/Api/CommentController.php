@@ -26,9 +26,10 @@ class CommentController extends Controller
      */
     public function store(Request $request, $restaurantId)
     {
+        $user = $request->user();
+
         $request->validate([
             'body' => 'required|string',
-            'user_id' => 'required|exists:users,id'
         ]);
     
         if (!Restaurant::find($restaurantId)) {
@@ -37,13 +38,11 @@ class CommentController extends Controller
             ]);
         }
     
-        $comment = new Comment([
-            'body' => $request->body,
+        $comment = Comment::create([
+            'user_id' => $user->id,
             'restaurant_id' => $restaurantId,
-            'user_id' => $request->user_id,
+            'body' => $request->body
         ]);
-    
-        $comment->save();
     
         return response()->json([
             'message' => 'Comment created successfully.',
