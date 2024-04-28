@@ -23,11 +23,11 @@
         </h5>
 
         <div id="fryft-zone-content">
-            <img id="fryft-zone-image" src="{{ asset("/images/fryft-zone.jpeg") }}" alt="Fryft Zone">
-
             <h5 id="fryft-zone-message">
                 While we strive to keep our listings within the designated Fryft Zone, it's possible that some restaurants may extend beyond these boundaries. If you encounter a restaurant listed outside of the Fryft Zone or notice any inaccurate information, please help us maintain the accuracy of our service by <a href="{{ route('reports.create') }}">reporting it here</a>. Your feedback is invaluable in helping us ensure that FryftEats remains the most reliable and student-friendly dining guide around.
             </h5>
+            
+            <img id="fryft-zone-image" src="{{ asset("/images/fryft-zone.jpeg") }}" alt="Fryft Zone">
         </div>
     </div>
 @endsection

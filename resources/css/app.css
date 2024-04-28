@@ -165,9 +165,6 @@ body {
 #fryft-zone-content {
 	margin: 0px auto 100px;
 	width: 80vw;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }
 
 #fryft-zone-image {
@@ -177,7 +174,6 @@ body {
 }
 
 #fryft-zone-message {
-	margin-left: 20px;
 	color: white;
 }
 
