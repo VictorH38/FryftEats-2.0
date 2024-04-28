@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RestaurantController;
-// use App\Http\Controllers\Api\FavoritesController;
+use App\Http\Controllers\Api\FavoritesController;
 // use App\Http\Controllers\Api\CommentController;
 // use App\Http\Controllers\Api\ReportController;
 
@@ -25,11 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::resource('restaurants', RestaurantController::class);
 
 // API routes for Favorites
-// Route::middleware('auth:sanctum')->group(function () {
-//     Route::get('/favorites', [FavoritesController::class, 'index']);
-//     Route::post('/favorites', [FavoritesController::class, 'store']);
-//     Route::delete('/favorites/{id}', [FavoritesController::class, 'destroy']);
-// });
+Route::get('/users/{userId}/favorites', [FavoritesController::class, 'index']);
+Route::post('/users/{userId}/favorites', [FavoritesController::class, 'store']);
+Route::delete('/users/{userId}/favorites/{restaurantId}', [FavoritesController::class, 'destroy']);
 
 // API routes for Comments
 // Route::post('/restaurants/{restaurantId}/comments', [CommentController::class, 'store']);
