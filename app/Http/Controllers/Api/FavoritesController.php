@@ -44,6 +44,20 @@ class FavoritesController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show($userId, $restaurantId)
+    {
+        $favorite = Favorite::where('user_id', $userId)->where('restaurant_id', $restaurantId)->first();
+
+        if ($favorite) {
+            return new FavoriteResource($favorite);
+        }
+
+        return response()->json(['message' => 'The restaurant is not in the user\'s favorites'], 404);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request, $userId, $restaurantId)

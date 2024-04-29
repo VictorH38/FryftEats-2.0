@@ -23,11 +23,16 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // API routes for Restaurants
-Route::resource('restaurants', RestaurantController::class);
+Route::get('/restaurants', [RestaurantController::class, 'index']);
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show']);
+Route::post('/restaurants', [RestaurantController::class, 'store']);
+Route::patch('/restaurants/{restaurant}', [RestaurantController::class, 'update']);
+Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy']);
 
 // API routes for Favorites
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{userId}/favorites', [FavoritesController::class, 'index']);
+    Route::get('/users/{userId}/favorites/{restaurantId}', [FavoritesController::class, 'show']);
     Route::post('/users/{userId}/favorites', [FavoritesController::class, 'store']);
     Route::delete('/users/{userId}/favorites/{restaurantId}', [FavoritesController::class, 'destroy']);
 });
