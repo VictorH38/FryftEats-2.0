@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\RestaurantResource;
 use App\Http\Resources\FavoriteResource;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,9 +17,9 @@ class FavoritesController extends Controller
      */
     public function index($userId)
     {
-        $favorites = Favorite::where('user_id', $userId)->get();
+        $favorites = Favorite::where('user_id', $userId)->with('restaurant')->get();
 
-        return FavoriteResource::collection($favorites);
+        return RestaurantResource::collection($favorites->pluck('restaurant'));
     }
 
     /**
