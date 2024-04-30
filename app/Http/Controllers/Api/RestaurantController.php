@@ -7,6 +7,7 @@ use App\Models\Restaurant;
 use App\Http\Resources\RestaurantResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RestaurantController extends Controller
 {
@@ -25,6 +26,11 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        $restaurant = null;
+        if ($request->has('url')) {
+            $restaurant = Restaurant::where('url', $request->input('url'))->first();
+        }
+
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -32,28 +38,30 @@ class RestaurantController extends Controller
             'cuisine' => 'nullable|string|max:255',
             'rating' => 'nullable|numeric|min:0|max:5',
             'price' => 'nullable|string|max:255',
-            'url' => 'nullable|url|max:255',
+            'url' => ['nullable', 'url', 'max:255', Rule::unique('restaurants')->ignore($restaurant)],
             'image_url' => 'nullable|url|max:255'
         ]);
-    
+
         if ($validation->fails()) {
             return response()->json([
                 'errors' => $validation->errors(),
             ], 422);
         }
-    
-        $restaurant = Restaurant::create([
-            'name' => $request->input('name'),
-            'address' => $request->input('address'),
-            'phone_number' => $request->input('phone_number'),
-            'cuisine' => $request->input('cuisine'),
-            'rating' => $request->input('rating'),
-            'price' => $request->input('price'),
-            'url' => $request->input('url'),
-            'image_url' => $request->input('image_url')
-        ]);
-    
-        return response()->json($restaurant, 201);
+
+        $restaurant = Restaurant::updateOrCreate(
+            ['url' => $request->input('url')],
+            [
+                'name' => $request->input('name'),
+                'address' => $request->input('address'),
+                'phone_number' => $request->input('phone_number'),
+                'cuisine' => $request->input('cuisine'),
+                'rating' => $request->input('rating'),
+                'price' => $request->input('price'),
+                'image_url' => $request->input('image_url')
+            ]
+        );
+
+        return response()->json($restaurant, $restaurant->wasRecentlyCreated ? 201 : 200);
     }
 
     /**
