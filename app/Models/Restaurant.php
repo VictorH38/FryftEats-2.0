@@ -23,6 +23,8 @@ class Restaurant extends Model
         'price',
         'url',
         'image_url',
+        'latitude',
+        'longitude',
     ];
 
     /**

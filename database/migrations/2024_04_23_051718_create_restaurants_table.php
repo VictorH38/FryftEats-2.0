@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('price', 255)->nullable();
             $table->string('url', 255)->nullable();
             $table->string('image_url', 255)->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->timestamps();
         });
     }

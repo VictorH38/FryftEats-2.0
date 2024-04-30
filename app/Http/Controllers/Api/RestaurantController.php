@@ -39,7 +39,9 @@ class RestaurantController extends Controller
             'rating' => 'nullable|numeric|min:0|max:5',
             'price' => 'nullable|string|max:255',
             'url' => ['nullable', 'url', 'max:255', Rule::unique('restaurants')->ignore($restaurant)],
-            'image_url' => 'nullable|url|max:255'
+            'image_url' => 'nullable|url|max:255',
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180'
         ]);
 
         if ($validation->fails()) {
@@ -57,7 +59,9 @@ class RestaurantController extends Controller
                 'cuisine' => $request->input('cuisine'),
                 'rating' => $request->input('rating'),
                 'price' => $request->input('price'),
-                'image_url' => $request->input('image_url')
+                'image_url' => $request->input('image_url'),
+                'latitude' => $request->input('latitude'),
+                'longitude' => $request->input('longitude')
             ]
         );
 

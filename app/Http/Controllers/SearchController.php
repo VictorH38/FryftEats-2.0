@@ -64,7 +64,9 @@ class SearchController extends Controller
                         'cuisine' => collect($item['categories'])->pluck('title')->implode(', '),
                         'rating' => $item['rating'],
                         'price' => $item['price'] ?? null,
-                        'image_url' => $item['image_url']
+                        'image_url' => $item['image_url'],
+                        'latitude' => $item['coordinates']['latitude'],
+                        'longitude' => $item['coordinates']['longitude']
                     ]
                 );
 
