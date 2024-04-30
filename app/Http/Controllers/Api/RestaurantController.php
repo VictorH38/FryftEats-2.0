@@ -12,12 +12,19 @@ use Illuminate\Validation\Rule;
 class RestaurantController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource, optionally sorted.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::all();
-
+        if ($request->has('sort')) {
+            $order = $request->query('order', 'asc');
+            $sortBy = $request->query('sort', 'name');
+    
+            $restaurants = Restaurant::orderBy($sortBy, $order)->get();
+        } else {
+            $restaurants = Restaurant::all();
+        }
+    
         return RestaurantResource::collection($restaurants);
     }
 
