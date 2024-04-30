@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // API routes for Restaurants
 Route::get('/restaurants', [RestaurantController::class, 'index']);
+Route::get('/restaurants/paginate', [RestaurantController::class, 'paginate']);
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show']);
 Route::post('/restaurants', [RestaurantController::class, 'store']);
 Route::patch('/restaurants/{restaurant}', [RestaurantController::class, 'update']);

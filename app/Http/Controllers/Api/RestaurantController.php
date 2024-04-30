@@ -16,6 +16,16 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        $restaurants = Restaurant::all();
+
+        return RestaurantResource::collection($restaurants);
+    }
+
+    /**
+     * Display a paginated listing of the resource.
+     */
+    public function paginate()
+    {
         $restaurants = Restaurant::paginate();
 
         return RestaurantResource::collection($restaurants);
