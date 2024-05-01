@@ -57,6 +57,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // API routes for Cache
-Route::get('/cache', [CacheController::class, 'index']);
+Route::get('/cache/{cache_key}', [CacheController::class, 'index']);
 Route::post('/cache', [CacheController::class, 'store']);
 Route::delete('/cache/{cache_key}', [CacheController::class, 'destroy']);

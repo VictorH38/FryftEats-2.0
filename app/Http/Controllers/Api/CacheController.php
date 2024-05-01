@@ -12,10 +12,9 @@ class CacheController extends Controller
     /**
      * Retrieve the list of cached restaurants by a custom cache key.
      */
-    public function index(Request $request)
+    public function index($cache_key)
     {
-        $cacheKey = $request->input('cache_key', 'default_restaurants');
-        $restaurants = Cache::get($cacheKey, []);
+        $restaurants = Cache::get($cache_key, []);
         return response()->json($restaurants);
     }
 
