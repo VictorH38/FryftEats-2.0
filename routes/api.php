@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\FavoritesController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\CacheController;
 
 // API routes for Authentication
 Route::post('/login', [AuthController::class, 'login']);
@@ -54,3 +55,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/reports/{id}', [ReportController::class, 'update']);
     Route::delete('/reports/{id}', [ReportController::class, 'destroy']);
 });
+
+// API routes for Cache
+Route::get('/cache', [CacheController::class, 'index']);
+Route::post('/cache', [CacheController::class, 'store']);
+Route::delete('/cache/{cache_key}', [CacheController::class, 'destroy']);
