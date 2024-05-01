@@ -9,6 +9,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PrivacyController;
 
 // Authentication
 Route::group(['middleware' => 'guest'], function () {
@@ -42,8 +43,11 @@ Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('co
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
-// Reports
+// Report Page
 Route::get('/reports/new', [ReportController::class, 'create'])->name('reports.create');
 Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
 Route::patch('/reports/{id}', [ReportController::class, 'update'])->name('reports.update');
 Route::delete('/reports/{id}', [ReportController::class, 'destroy'])->name('reports.destroy');
+
+// Privacy Policy Page
+Route::get('/privacy', [PrivacyController::class, 'index'])->name('privacy.index');
