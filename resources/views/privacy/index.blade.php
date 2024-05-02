@@ -14,35 +14,35 @@
         }
 
         [data-custom-class='body'] {
-            background-color: white;
+            background-color: black;
             padding: 30px 100px 0px;
         }
 
         [data-custom-class='title'], [data-custom-class='title'] * {
             font-family: Arial !important;
             font-size: 26px !important;
-            color: white !important;
+            color: black !important;
         }
 
         [data-custom-class='subtitle'], [data-custom-class='subtitle'] * {      font-family: Arial !important;
-            color: white !important;
+            color: black !important;
             font-size: 14px !important;
         }
 
         [data-custom-class='heading_1'], [data-custom-class='heading_1'] * {
             font-family: Arial !important;
             font-size: 19px !important;
-            color: white !important;
+            color: black !important;
         }
 
         [data-custom-class='heading_2'], [data-custom-class='heading_2'] * {
             font-family: Arial !important;
             font-size: 17px !important;
-            color: white !important;
+            color: black !important;
         }
 
         [data-custom-class='body_text'], [data-custom-class='body_text'] * {
-            color: white !important;
+            color: black !important;
             font-size: 14px !important;
             font-family: Arial !important;
         }
