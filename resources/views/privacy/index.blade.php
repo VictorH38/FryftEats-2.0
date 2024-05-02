@@ -14,7 +14,7 @@
         }
 
         [data-custom-class='body'] {
-            background-color: black;
+            background-color: white;
             padding: 30px 100px 0px;
         }
 
