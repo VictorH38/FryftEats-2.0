@@ -67,11 +67,7 @@ class SearchController extends Controller
                     )->toArray();
                 }, $results);
             } else {
-                return response()->json([
-                    'url' => $apiUrl,
-                    'params' => $queryParams,
-                    'response' => $response->body()
-                ]);
+                return [];
             }
         });
 
