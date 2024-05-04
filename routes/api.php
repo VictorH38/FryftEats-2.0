@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\FavoritesController;
 use App\Http\Controllers\Api\CommentController;
@@ -22,6 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/user', [UserController::class, 'update']);
     Route::delete('/user', [UserController::class, 'destroy']);
 });
+
+// API routes for Search
+Route::post('/search', [SearchController::class, 'index']);
 
 // API routes for Restaurants
 Route::get('/restaurants', [RestaurantController::class, 'index']);
