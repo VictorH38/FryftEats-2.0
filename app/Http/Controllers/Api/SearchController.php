@@ -67,15 +67,12 @@ class SearchController extends Controller
                     )->toArray();
                 }, $results);
             } else {
-                response()->json([
+                return response()->json([
                     'url' => $apiUrl,
                     'params' => $queryParams,
                     'response' => $response->body()
                 ]);
-                return [];
             }
-
-            return [];
         });
 
         return response()->json($restaurants);
