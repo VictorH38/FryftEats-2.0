@@ -8,6 +8,8 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
+use Illuminate\Support\Facades\Log;
+
 class SearchController extends Controller
 {
     /**
@@ -64,6 +66,13 @@ class SearchController extends Controller
                         ]
                     )->toArray();
                 }, $results);
+            } else {
+                Log::error('Failed Yelp API call', [
+                    'url' => $apiUrl,
+                    'params' => $queryParams,
+                    'response' => $response->body()
+                ]);
+                return [];
             }
 
             return [];
