@@ -14,7 +14,12 @@ class CacheController extends Controller
      */
     public function index($cache_key)
     {
-        $restaurants = Cache::get($cache_key, []);
+        $restaurants = Cache::get($cache_key);
+        
+        if ($restaurants === null) {
+            return response()->json(['message' => 'No data found for this cache key'], 404);
+        }
+
         return response()->json($restaurants);
     }
 
