@@ -67,7 +67,7 @@ class SearchController extends Controller
                     )->toArray();
                 }, $results);
             } else {
-                Log::error('Failed Yelp API call', [
+                response()->json([
                     'url' => $apiUrl,
                     'params' => $queryParams,
                     'response' => $response->body()
